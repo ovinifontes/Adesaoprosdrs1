@@ -1,5 +1,18 @@
 import { useState } from 'react';
-import { Send, Shield, CheckCircle } from 'lucide-react';
+import { Send, Shield, CheckCircle, AlertCircle } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
+
+/** Normaliza o telefone para o padrão 55dd9xxxxxxxx (ex: 5565992249488) */
+function normalizePhone(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.length >= 13 && digits.startsWith('55')) {
+    return digits.slice(0, 13);
+  }
+  if (digits.length >= 11) {
+    return '55' + digits.slice(-11);
+  }
+  return '55' + digits;
+}
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -7,15 +20,32 @@ export function ContactForm() {
     phone: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Mock submission - in real scenario, this would send to backend
-    console.log('Form submitted:', formData);
+    setError(null);
+    setLoading(true);
+
+    const telefoneNormalizado = normalizePhone(formData.phone);
+
+    const { error: insertError } = await supabase
+      .from('captura_lp_adesaopro_sdr1')
+      .insert({
+        nome: formData.name.trim(),
+        telefone: telefoneNormalizado
+      });
+
+    setLoading(false);
+
+    if (insertError) {
+      setError('Não foi possível enviar. Tente novamente ou entre em contato pelo WhatsApp.');
+      return;
+    }
+
     setSubmitted(true);
-    
-    // Reset form after 3 seconds
+
     setTimeout(() => {
       setSubmitted(false);
       setFormData({ name: '', phone: '' });
@@ -78,12 +108,26 @@ export function ContactForm() {
                 />
               </div>
 
+              {error && (
+                <div className="flex items-center gap-2 p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
+                  <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                  {error}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-4 bg-[#03c355] text-white font-semibold rounded-lg hover:bg-[#02a847] transition-all duration-300 shadow-lg shadow-[#03c355]/20 hover:shadow-[#03c355]/40 hover:scale-[1.02] flex items-center justify-center gap-2"
+                disabled={loading}
+                className="w-full py-4 bg-[#03c355] text-white font-semibold rounded-lg hover:bg-[#02a847] transition-all duration-300 shadow-lg shadow-[#03c355]/20 hover:shadow-[#03c355]/40 hover:scale-[1.02] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <Send className="w-5 h-5" />
-                Quero que Me Chamem
+                {loading ? (
+                  'Enviando...'
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Quero que Me Chamem
+                  </>
+                )}
               </button>
 
               <div className="flex items-start gap-3 pt-4 border-t border-gray-800">

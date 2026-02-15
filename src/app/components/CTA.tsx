@@ -7,7 +7,7 @@ export function CTA() {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5500000000000', '_blank');
+    window.open('https://wa.me/5565992249488', '_blank');
   };
 
   return (

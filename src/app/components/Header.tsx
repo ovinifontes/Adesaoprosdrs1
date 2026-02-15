@@ -22,8 +22,12 @@ export function Header() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#03c355] to-[#0c6c34] flex items-center justify-center">
-              <span className="text-white font-bold text-xl">AP</span>
+            <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 bg-[#010101]">
+              <img
+                src={`${import.meta.env.BASE_URL}logo-adesaopro.png`}
+                alt="Adesão Pro"
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <h1 className="text-white font-bold text-lg leading-tight">SDR da Adesão Pro</h1>

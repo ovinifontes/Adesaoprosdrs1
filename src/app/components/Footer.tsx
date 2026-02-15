@@ -10,8 +10,12 @@ export function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#03c355] to-[#0c6c34] flex items-center justify-center">
-                <span className="text-white font-bold text-xl">AP</span>
+              <div className="w-10 h-10 rounded-lg overflow-hidden flex items-center justify-center flex-shrink-0 bg-[#010101]">
+                <img
+                  src={`${import.meta.env.BASE_URL}logo-adesaopro.png`}
+                  alt="Adesão Pro"
+                  className="w-full h-full object-contain"
+                />
               </div>
               <div>
                 <h3 className="text-white font-bold">SDR da Adesão Pro</h3>
@@ -28,20 +32,13 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-4">Contato</h4>
             <div className="space-y-3">
               <a 
-                href="mailto:contato@adesaopro.com.br" 
-                className="flex items-center gap-2 text-gray-400 hover:text-[#03c355] transition-colors text-sm"
-              >
-                <Mail className="w-4 h-4" />
-                contato@adesaopro.com.br
-              </a>
-              <a 
-                href="https://wa.me/5500000000000" 
+                href="https://wa.me/5565992249488" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-[#03c355] transition-colors text-sm"
               >
                 <Phone className="w-4 h-4" />
-                WhatsApp: (00) 00000-0000
+                WhatsApp: (65) 99224-9488
               </a>
             </div>
           </div>
