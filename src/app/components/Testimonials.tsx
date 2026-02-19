@@ -79,11 +79,7 @@ export function Testimonials() {
           ))}
         </div>
 
-        <div className="mt-12 text-center p-6 rounded-xl bg-gradient-to-r from-gray-900 to-gray-900/50 border border-gray-800">
-          <p className="text-gray-400">
-            <strong className="text-white">Depoimentos reais.</strong> Nomes preservados por privacidade.
-          </p>
-        </div>
+        
       </div>
     </section>
   );

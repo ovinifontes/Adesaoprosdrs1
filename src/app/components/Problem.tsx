@@ -89,12 +89,10 @@ export function Problem() {
             A SOLUÇÃO ESTÁ PRONTA
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl mb-6">
-            <span className="text-[#03c355]">Ativou. Rodou.</span>
-            <br />
-            O SDR da Adesão Pro Assume o Pré-Atendimento
+            O <span className="text-[#03c355]">SDR da Adesão Pro</span> assume o Pré-Atendimento
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Produto padronizado para performance. Não é consultoria. Não é sob medida. É um <strong className="text-white">SDR de IA especializado em consórcio</strong> que atende, qualifica e entrega o lead pronto para você fechar.
+            Produto padronizado para performance. <strong className="text-white">Aumente sua conversão.</strong> E pare de perder tempo com leads desqualificados.
           </p>
         </div>
       </div>

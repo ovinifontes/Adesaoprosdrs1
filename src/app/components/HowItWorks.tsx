@@ -132,11 +132,7 @@ export function HowItWorks() {
           ))}
         </div>
 
-        <div className="text-center mt-12 p-6 rounded-xl bg-gradient-to-r from-[#03c355]/5 via-transparent to-[#03c355]/5 border border-[#03c355]/20">
-          <p className="text-lg md:text-xl text-gray-200 italic">
-            "Você entra quando faz sentido. O resto é automático."
-          </p>
-        </div>
+        
       </div>
     </section>
   );

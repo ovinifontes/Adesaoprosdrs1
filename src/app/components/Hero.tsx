@@ -33,7 +33,7 @@ export function Hero() {
             </h1>
 
             <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0">
-              O <strong className="text-white">SDR da Adesão Pro</strong> atende, qualifica e entrega leads prontos para você fechar. Resposta em segundos. Follow-up automático. Relatórios objetivos. Você entra só na hora de vender.
+              O <strong className="text-white">SDR da Adesão Pro foi feito para o CONSÓRCIO</strong> atende, qualifica e entrega leads prontos para você fechar. Você entra só na hora de vender.
             </p>
 
             {/* Bullets */}

@@ -78,12 +78,6 @@ export function ForWho() {
               <li className="flex items-start gap-3">
                 <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-1" />
                 <span className="text-gray-400">
-                  Quem quer algo <strong className="text-gray-300">totalmente personalizado "do seu jeito"</strong> — isso é um produto padronizado
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <XCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-1" />
-                <span className="text-gray-400">
                   Quem <strong className="text-gray-300">não quer processo</strong> e prefere atender tudo manualmente
                 </span>
               </li>
@@ -115,11 +109,7 @@ export function ForWho() {
           </div>
         </div>
 
-        <div className="text-center mt-12 p-6 rounded-xl bg-gradient-to-r from-gray-900 to-gray-900/50 border border-gray-800">
-          <p className="text-lg text-gray-300">
-            <strong className="text-white">Produto pronto. Padronizado. Performance.</strong> Se você busca isso, está no lugar certo.
-          </p>
-        </div>
+      
       </div>
     </section>
   );

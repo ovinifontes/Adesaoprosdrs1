@@ -23,7 +23,7 @@ export function Authority() {
             <div className="w-16 h-16 rounded-xl bg-[#03c355]/10 border border-[#03c355]/30 flex items-center justify-center mb-6 group-hover:bg-[#03c355]/20 group-hover:scale-110 transition-all">
               <Award className="w-8 h-8 text-[#03c355]" />
             </div>
-            <h3 className="text-2xl mb-4 text-white">Treinado pelos Maiores</h3>
+            <h3 className="text-2xl mb-4 text-white">Feito para o CONSÓRCIO</h3>
             <p className="text-gray-400 leading-relaxed">
               Base de conhecimento construída com os <strong className="text-white">maiores players do mercado de consórcio</strong>. Técnicas, objeções, contexto real.
             </p>
@@ -43,9 +43,9 @@ export function Authority() {
             <div className="w-16 h-16 rounded-xl bg-[#03c355]/10 border border-[#03c355]/30 flex items-center justify-center mb-6 group-hover:bg-[#03c355]/20 group-hover:scale-110 transition-all">
               <Zap className="w-8 h-8 text-[#03c355]" />
             </div>
-            <h3 className="text-2xl mb-4 text-white">Aplicação em Tempo Real</h3>
+            <h3 className="text-2xl mb-4 text-white">Atendimento individual e especializado</h3>
             <p className="text-gray-400 leading-relaxed">
-              Tudo que foi treinado é aplicado <strong className="text-white">com consistência absoluta</strong>. Sem variação. Sem falha humana.
+              Atende cada lead de uma maneira <strong className="text-white">única e exclusiva</strong>, não repete a mesma coisa para todos.
             </p>
           </div>
         </div>

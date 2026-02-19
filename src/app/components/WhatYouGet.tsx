@@ -15,7 +15,7 @@ export function WhatYouGet() {
   ];
 
   return (
-    <section className="py-20 px-4 relative">
+    <section className="py-20 px-4 relative" style={{ display: 'none' }}>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0c6c34]/5 to-transparent pointer-events-none" />
       
       <div className="max-w-5xl mx-auto relative z-10">

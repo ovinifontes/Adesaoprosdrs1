@@ -133,7 +133,7 @@ export function Comparison() {
 
         <div className="mt-12 text-center p-6 rounded-xl bg-gradient-to-r from-gray-900 to-gray-900/50 border border-gray-800">
           <p className="text-lg text-gray-300">
-            <strong className="text-white">Objetivo.</strong> Sem "humilhar" humano. Apenas mostrando <span className="text-[#03c355]">onde a tecnologia ajuda você a escalar</span>.
+            <strong className="text-white">Objetivo.</strong> <span className="text-[#03c355]">Elevar o nível do seu atendimento</span>.
           </p>
         </div>
       </div>
