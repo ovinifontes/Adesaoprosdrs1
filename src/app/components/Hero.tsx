@@ -1,13 +1,17 @@
+import { useLocation } from 'react-router';
 import { Calendar, MessageCircle, CheckCircle, Clock, TrendingUp, Zap, Target } from 'lucide-react';
 
 export function Hero() {
+  const location = useLocation();
+  const isSDRv2 = location.pathname.includes('/sdrv2');
+
   const scrollToForm = () => {
     const formSection = document.getElementById('contact-form');
     formSection?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5565992249488', '_blank');
+    window.open('https://wa.me/5561995324617', '_blank');
   };
 
   return (
@@ -91,15 +95,17 @@ export function Hero() {
                 </span>
               </button>
 
-              <button 
-                onClick={handleWhatsApp}
-                className="px-8 py-4 bg-transparent border-2 border-[#03c355] text-[#03c355] font-semibold rounded-lg hover:bg-[#03c355]/10 transition-all duration-300"
-              >
-                <span className="flex items-center justify-center gap-2">
-                  <MessageCircle className="w-5 h-5" />
-                  Falar no WhatsApp
-                </span>
-              </button>
+              {!isSDRv2 && (
+                <button 
+                  onClick={handleWhatsApp}
+                  className="px-8 py-4 bg-transparent border-2 border-[#03c355] text-[#03c355] font-semibold rounded-lg hover:bg-[#03c355]/10 transition-all duration-300"
+                >
+                  <span className="flex items-center justify-center gap-2">
+                    <MessageCircle className="w-5 h-5" />
+                    Falar no WhatsApp
+                  </span>
+                </button>
+              )}
             </div>
 
             <p className="text-sm text-gray-400">

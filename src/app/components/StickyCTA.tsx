@@ -20,7 +20,7 @@ export function StickyCTA() {
   };
 
   const handleWhatsApp = () => {
-    window.open('https://wa.me/5565992249488', '_blank');
+    window.open('https://wa.me/5561995324617', '_blank');
   };
 
   return (

@@ -1,4 +1,6 @@
-import { Quote, MessageSquare } from 'lucide-react';
+import { MessageSquare } from 'lucide-react';
+
+const BASE_URL = import.meta.env.BASE_URL;
 
 export function Testimonials() {
   const testimonials = [
@@ -7,21 +9,24 @@ export function Testimonials() {
       name: 'Carlos M.',
       location: 'São Paulo - SP',
       text: 'Antes eu perdia lead toda hora porque demorava pra responder. Agora o SDR responde na hora, 24/7. Parei de perder oportunidade por causa de demora. Faz total diferença.',
-      focus: 'Resposta imediata'
+      focus: 'Resposta imediata',
+      photo: `${BASE_URL}carlos-jpg.jpeg`
     },
     {
       id: 2,
       name: 'Fernanda L.',
       location: 'Curitiba - PR',
       text: 'Eu gastava horas com curioso e gente sem perfil. Hoje o SDR filtra tudo e só me chama quando o lead vale. Mais reuniões, menos desgaste. Simples assim.',
-      focus: 'Qualificação real'
+      focus: 'Qualificação real',
+      photo: `${BASE_URL}fernanda-jpg.jpeg`
     },
     {
       id: 3,
       name: 'Ricardo S.',
       location: 'Belo Horizonte - MG',
       text: 'Follow-up era meu ponto fraco. Eu esquecia, o lead esquecia de mim. Com o SDR isso não existe mais. Ele volta automático, não perde nada. Qualidade constante o tempo todo.',
-      focus: 'Follow-up automático'
+      focus: 'Follow-up automático',
+      photo: `${BASE_URL}ricardo-jpg.jpeg`
     }
   ];
 
@@ -53,9 +58,16 @@ export function Testimonials() {
                 <MessageSquare className="w-6 h-6 text-[#03c355]/30 group-hover:text-[#03c355]/50 transition-colors" />
               </div>
 
-              {/* Quote icon */}
-              <div className="w-12 h-12 rounded-lg bg-[#03c355]/10 border border-[#03c355]/30 flex items-center justify-center mb-6">
-                <Quote className="w-6 h-6 text-[#03c355]" />
+              {/* Foto da pessoa */}
+              <div className="mb-6">
+                <img
+                  src={testimonial.photo}
+                  alt={testimonial.name}
+                  className="w-14 h-14 rounded-full object-cover border-2 border-[#03c355]/30"
+                  width={56}
+                  height={56}
+                  loading="lazy"
+                />
               </div>
 
               {/* Testimonial text */}

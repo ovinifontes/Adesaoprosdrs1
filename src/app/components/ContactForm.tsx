@@ -2,18 +2,25 @@ import { useState } from 'react';
 import { Send, Shield, CheckCircle, AlertCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
-/** Normaliza o telefone para o padrão 55dd9xxxxxxxx (ex: 5565992249488) */
+const MAX_PHONE_DIGITS = 11; // DD (2) + 9 dígitos (celular)
+const CAPTURA_TABLE_SDRV1 = 'captura_lp_adesaopro_sdrv1';
+
+/** Formata para exibição: (dd) 9xxxx-xxxx ou (dd) xxxx-xxxx */
+function formatPhoneDisplay(digits: string): string {
+  const d = digits.slice(0, MAX_PHONE_DIGITS);
+  if (d.length <= 2) return d.length ? `(${d}` : '';
+  if (d.length <= 7) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
+  return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
+}
+
+/** Normaliza o telefone para o padrão 55dd9xxxxxxxx (ex: 5561995324617) */
 function normalizePhone(phone: string): string {
-  const digits = phone.replace(/\D/g, '');
-  if (digits.length >= 13 && digits.startsWith('55')) {
-    return digits.slice(0, 13);
-  }
-  if (digits.length >= 11) {
-    return '55' + digits.slice(-11);
-  }
+  const digits = phone.replace(/\D/g, '').slice(0, MAX_PHONE_DIGITS);
+  if (digits.length >= 11) return '55' + digits.slice(-11);
   return '55' + digits;
 }
 
+/** Formulário simples para SDRv1: nome + telefone. */
 export function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -26,12 +33,17 @@ export function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    const digits = formData.phone.replace(/\D/g, '');
+    if (digits.length < 10) {
+      setError('Informe o DDD e o número com pelo menos 10 dígitos.');
+      return;
+    }
     setLoading(true);
 
     const telefoneNormalizado = normalizePhone(formData.phone);
 
     const { error: insertError } = await supabase
-      .from('captura_lp_adesaopro_sdr1')
+      .from(CAPTURA_TABLE_SDRV1)
       .insert({
         nome: formData.name.trim(),
         telefone: telefoneNormalizado
@@ -53,10 +65,13 @@ export function ContactForm() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    if (name === 'phone') {
+      const digits = value.replace(/\D/g, '').slice(0, MAX_PHONE_DIGITS);
+      setFormData({ ...formData, phone: formatPhoneDisplay(digits) });
+      return;
+    }
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
@@ -104,7 +119,7 @@ export function ContactForm() {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:border-[#03c355] focus:outline-none focus:ring-2 focus:ring-[#03c355]/20 transition-all"
-                  placeholder="(00) 00000-0000"
+                  placeholder="Digite seu whatsapp"
                 />
               </div>
 

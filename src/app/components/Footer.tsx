@@ -32,13 +32,13 @@ export function Footer() {
             <h4 className="text-white font-semibold mb-4">Contato</h4>
             <div className="space-y-3">
               <a 
-                href="https://wa.me/5565992249488" 
+                href="https://wa.me/5561995324617" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-gray-400 hover:text-[#03c355] transition-colors text-sm"
               >
                 <Phone className="w-4 h-4" />
-                WhatsApp: (65) 99224-9488
+                WhatsApp: (61) 99532-4617
               </a>
             </div>
           </div>
