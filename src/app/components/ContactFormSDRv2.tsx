@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase';
 const MAX_PHONE_DIGITS = 11;
 const TOTAL_STEPS = 3;
 const CAPTURA_TABLE_SDRV2 = 'captura_lp_adesaopro_sdrv2';
+const WEBHOOK_SDRV2 = 'https://adesao-pro-n8n-web.rmidkm.easypanel.host/webhook/site_sdrv2_adesaopro_avigrup';
 
 function formatPhoneDisplay(digits: string): string {
   const d = digits.slice(0, MAX_PHONE_DIGITS);
@@ -119,6 +120,15 @@ export function ContactFormSDRv2() {
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const isFirstRender = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [step, submitted]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -147,7 +157,7 @@ export function ContactFormSDRv2() {
 
     const telefoneNormalizado = normalizePhone(formData.phone);
 
-    const { error: insertError } = await supabase.from(CAPTURA_TABLE_SDRV2).insert({
+    const payload = {
       nome: formData.name.trim(),
       telefone: telefoneNormalizado,
       tipo_bem: formData.tipo_bem || null,
@@ -156,13 +166,27 @@ export function ContactFormSDRv2() {
       quantidade_leads: formData.quantidade_leads || null,
       urgencia: formData.urgencia || null,
       quanto_valor: formData.quanto_valor.trim() || null
-    });
+    };
 
-    setLoading(false);
+    const { error: insertError } = await supabase.from(CAPTURA_TABLE_SDRV2).insert(payload);
+
     if (insertError) {
+      setLoading(false);
       setError('Não foi possível enviar. Tente novamente ou entre em contato pelo WhatsApp.');
       return;
     }
+
+    try {
+      await fetch(WEBHOOK_SDRV2, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch {
+      // Webhook em segundo plano; não bloqueia a tela de sucesso
+    }
+
+    setLoading(false);
     setSubmitted(true);
   };
 
