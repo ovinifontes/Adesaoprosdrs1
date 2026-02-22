@@ -4,6 +4,7 @@ import { supabase } from '@/lib/supabase';
 
 const MAX_PHONE_DIGITS = 11; // DD (2) + 9 dígitos (celular)
 const CAPTURA_TABLE_SDRV1 = 'captura_lp_adesaopro_sdrv1';
+const WEBHOOK_BOAS_VINDAS_SDRV1 = 'https://adesao-pro-n8n-web.rmidkm.easypanel.host/webhook/boas_vindas_cliente_sdrv1';
 
 /** Formata para exibição: (dd) 9xxxx-xxxx ou (dd) xxxx-xxxx */
 function formatPhoneDisplay(digits: string): string {
@@ -42,20 +43,32 @@ export function ContactForm() {
 
     const telefoneNormalizado = normalizePhone(formData.phone);
 
+    const payload = {
+      nome: formData.name.trim(),
+      telefone: telefoneNormalizado
+    };
+
     const { error: insertError } = await supabase
       .from(CAPTURA_TABLE_SDRV1)
-      .insert({
-        nome: formData.name.trim(),
-        telefone: telefoneNormalizado
-      });
-
-    setLoading(false);
+      .insert(payload);
 
     if (insertError) {
+      setLoading(false);
       setError('Não foi possível enviar. Tente novamente ou entre em contato pelo WhatsApp.');
       return;
     }
 
+    try {
+      await fetch(WEBHOOK_BOAS_VINDAS_SDRV1, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch {
+      // Webhook em segundo plano; não bloqueia a tela de sucesso
+    }
+
+    setLoading(false);
     setSubmitted(true);
 
     setTimeout(() => {
