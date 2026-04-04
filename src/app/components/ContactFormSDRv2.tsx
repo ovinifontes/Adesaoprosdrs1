@@ -176,6 +176,8 @@ export function ContactFormSDRv2() {
       return;
     }
 
+    window.fbq?.('track', 'Lead');
+
     try {
       await fetch(WEBHOOK_SDRV2, {
         method: 'POST',
