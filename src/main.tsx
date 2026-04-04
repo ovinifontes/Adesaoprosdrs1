@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router';
+import { MetaPixelSDR } from './app/components/MetaPixelSDR';
 import { Home } from './app/pages/Home';
 import { SDRv1Page } from './app/pages/SDRv1Page';
 import { SDRv2Page } from './app/pages/SDRv2Page';
@@ -14,5 +15,6 @@ createRoot(document.getElementById('root')!).render(
       <Route path="/sdrv1" element={<SDRv1Page />} />
       <Route path="/sdrv2" element={<SDRv2Page />} />
     </Routes>
+    <MetaPixelSDR />
   </BrowserRouter>
 );
